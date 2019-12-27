@@ -28,7 +28,10 @@ This will produce the following files:
 
 ## Build Production Bundle for TYPO3
 
+`npm run build-bundle`
+
 This will produce the following files:
+
 * `build/static/css/main.*.css`
 * `build/static/js/main.*.js`
 
