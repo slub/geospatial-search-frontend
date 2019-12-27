@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no, maximum-scale=1.0, user-scalable=no">
+    <meta name="theme-color" content="#2F3BA2">
+    <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
+    <link rel="shortcut icon" href="%PUBLIC_URL%/favicon.ico" type="image/x-icon" />
+    <title>%REACT_APP_WEBSITE_TITLE%</title>
+    <style>
+        /* styling for first loading feedback */
+        @keyframes spin {
+            0% {
+                transform: rotate(0deg);
+            }
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        html, body, .osw-app {
+            height: 100%;
+        }
+
+        .digas-loading-start {
+            height: 100%;
+
+            width: 100%;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            background: transparent;
+        }
+
+        .digas-loading-child-start {
+            border-radius: 50%;
+            width: 100px;
+            height: 100px;
+            border: .25rem solid rgb(225,225,225);
+            border-top-color: #4e99ce;
+            animation: spin 1s infinite linear;
+        }
+    </style>
+</head>
+
+<body>
+    <noscript>
+        <div class="content no-script">
+            <h1>Your Browser does not support Javascript</h1>
+            <p>
+                This web application is based on Javascript. In case your browser does not support Javascript, use
+                another browser which supports Javascript or contact as <a href="mailto:%REACT_APP_CONTACT_MAIL%">%REACT_APP_CONTACT_MAIL%</a>.
+            </p>
+        </div>
+    </noscript>
+    <div id="root" class="osw-app">
+        <div class="digas-loading-start">
+            <div class="digas-loading-child-start"></div>
+        </div>
+    </div>
+</body>
+</html>

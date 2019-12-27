@@ -1,0 +1,34 @@
+@import "../../../../_sass/variables";
+
+.digas-popup-container {
+  position: absolute;
+  top: 40%;
+  left: 50%;
+  right: auto;
+  bottom: auto;
+  overflow: auto;
+  outline: none;
+  padding: 20px;
+  transform: translate(-50%, -50%);
+  box-shadow: 0 3px 5px -1px rgba(0,0,0,0.2), 0px 5px 8px 0px rgba(0,0,0,0.14), 0px 1px 14px 0px rgba(0,0,0,0.12);
+  background-color: #fff;
+
+  @media screen and (max-width: $break-point-xs) {
+    top: 15%;
+  }
+}
+
+.digas-popup-content {
+  width: 350px;
+}
+
+.digas-popup-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  -webkit-tap-highlight-color: transparent;
+  touch-action: none;
+}

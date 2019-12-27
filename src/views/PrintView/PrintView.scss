@@ -1,0 +1,84 @@
+.digas-view-print {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: white;
+  z-index: 1300;
+
+  .print-header {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 15px;
+
+    .feedback {
+      text-align: left;
+      flex-grow: 1;
+    }
+
+    .controls {
+      flex-shrink: 1;
+      float: right;
+      display: flex;
+      flex-direction: row;
+      > div {
+        padding: 0 15px;
+        cursor: pointer;
+      }
+    }
+
+    h3 {
+      margin-bottom: 10px;
+      font-size: 26px;
+    }
+  }
+
+  .print-content {
+    position: absolute;
+    top: 85px;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    overflow-y: scroll;;
+
+    > div {
+      position: relative;
+      padding-top: 10px;
+      &:before {
+        position: absolute;
+        top: 0;
+        right: 60px;
+        left: 60px;
+        height: 1px;
+        background: lightgrey;
+        content: " ";
+      }
+    }
+
+    .content-container {
+      padding: 25px 10px;
+    }
+  }
+}
+
+.digas-view-print {
+  &.printing {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    background: white;
+
+    .print-content {
+      height: 100%;
+      overflow-y: visible;
+      position: relative;
+      top: 0;
+
+      .content-container {
+        padding: 10px;
+      }
+    }
+  }
+}

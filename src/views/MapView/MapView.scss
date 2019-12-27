@@ -1,0 +1,90 @@
+@import "../../_sass/variables.scss";
+
+.digas-view-map {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  display: block;
+  overflow: hidden;
+  @include transform(translateX(0));
+  @include transition(all .2s ease-out);
+
+  .ol-zoom, .search-control {
+    @include transition(all .2s ease-out);
+    > button {
+      cursor: pointer;
+    }
+  }
+
+  .ol-scale-line {
+    right: 150px;
+    left: auto;
+    bottom: 2px;
+  }
+
+  &.background {
+    .ol-zoom, .search-control {
+      @media screen and (max-width: $break-point-xs) {
+        display: none;
+      }
+
+      @media screen and (min-width: $break-point-xs) and (max-width: $break-point-md) {
+        left: 460px;
+      }
+
+      @media screen and (min-width: $break-point-md) and (max-width: $break-point-lg) {
+        left: 34%;
+      }
+
+      @media screen and (min-width: $break-point-lg) {
+        left: 25.5%;
+      }
+    }
+  }
+}
+
+@media screen and (min-width: $break-point-md) and (max-width: $break-point-lg) {
+  .digas-view-map {
+      left: 33%;
+  }
+}
+
+@media screen and (min-width: $break-point-lg) {
+  .digas-view-map {
+      left: 25%;
+  }
+}
+
+.digas-documents-popup {
+  padding: 0;
+  top: 30%;
+
+  .documents-picker {
+    .header {
+      padding: 10px 0;
+      text-align: left;
+      border-bottom: 1px solid #333;
+
+      > h3 {
+        padding-left: 5px;
+      }
+    }
+
+    .content {
+      padding: 5px;
+      max-height: 300px;
+      overflow-y: scroll;
+      overflow-x: hidden;
+
+      .list-element {
+        > div:hover {
+          background-color: #eee;
+          text-decoration: none;
+          cursor: pointer;
+        }
+      }
+    }
+  }
+}

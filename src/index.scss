@@ -1,0 +1,16 @@
+.missing-browser-support {
+  position: absolute;
+  top: 100px;
+  margin-bottom: 0;
+  margin-top: 0;
+  margin-left: calc(10%);
+  margin-right: calc(10%);
+  padding: 30px 30px 60px 30px;
+  box-shadow: 0 0 4px rgba(0, 0, 0, 0.2);
+  background: #fff;
+
+  > h2 {
+    font-size: 26px;
+    padding-bottom: 20px;
+  }
+}

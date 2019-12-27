@@ -1,0 +1,21 @@
+// Colors
+$baseColor: rgb(53,130,53);
+
+// Breakpoints
+$break-point-xs: 500px;
+$break-point-md: 1024px;
+$break-point-lg: 1200px;
+
+// Basic mixins for multiple use in SCSS files
+@mixin transition($transitionValue: all .2s ease-out) {
+  -webkit-transition: $transitionValue;
+  -moz-transition: $transitionValue;
+  -o-transition: $transitionValue;
+  transition: $transitionValue;
+}
+@mixin transform($transformValue) {
+  -webkit-transform: $transformValue;
+  -moz-transform: $transformValue;
+  -ms-transform: $transformValue;
+  transform: $transformValue;
+}
