@@ -6,8 +6,6 @@
  */
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import CloseIcon from 'react-ionicons/lib/MdClose';
-import ListIcon from 'react-ionicons/lib/MdList';
 import './SideBarToggle.scss';
 
 export default class SideBarToggle extends Component {
@@ -53,11 +51,6 @@ export default class SideBarToggle extends Component {
 				className={`digas-sidebar-toggle${className.length > 0 ? className : ''}${toggleIn ? ' toggle-in' : ' toggle-out'}`}
 				onClick={this.handleClickToggle.bind(this)}
 			>
-				{
-					!toggleIn
-					? <ListIcon fontSize="50px"/>
-					: <CloseIcon fontSize="50px" />
-				}
 				{
 					count > 0 && (<span className="digas-badge">{count}</span>)
 				}

@@ -209,6 +209,11 @@ class App extends Component {
           selectDocuments={selectDocuments}
           spatialSearchMethod={spatialSearchMethode}
         />
+        <SideBarToggle
+            count={documents.size}
+            onToggle={this.handleSidebarToggle}
+            toggleIn={toggleIn}
+        />
         <SideBarView
           documents={documents}
           fetchOnlyPublic={fetchOnlyPublic}
@@ -228,11 +233,6 @@ class App extends Component {
           printDialogOpen={printDialogOpen}
           sorted={sorted}
           spatialSearchMethod={spatialSearchMethode}
-          toggleIn={toggleIn}
-        />
-        <SideBarToggle
-          count={documents.size}
-          onToggle={this.handleSidebarToggle}
           toggleIn={toggleIn}
         />
         {
