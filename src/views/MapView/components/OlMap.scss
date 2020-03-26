@@ -8,6 +8,10 @@
   top: 70px;
   right: 10px;
   left: auto;
+  @media screen and (min-width: $break-point-md) {
+    right: auto;
+    left: 10px;
+  }
 }
 
 .search-control {
@@ -26,4 +30,8 @@
     display: none;
   }
 
+  @media screen and (min-width: $break-point-md) {
+    right: auto;
+    left: 10px;
+  }
 }
