@@ -1,7 +1,29 @@
-.search-control {
-  top: 65px;
-  left: .5em;
+@import "../../../_sass/variables.scss";
+
+.ol-control button {
+  background: rgba(darken($baseColor, 10%), .8);
 }
-.ol-touch .search-control {
-  top: 80px;
+
+.ol-zoom {
+  top: 70px;
+  right: 10px;
+  left: auto;
+}
+
+.search-control {
+  top: 140px;
+  right: 10px;
+
+  svg {
+    position: relative;
+    top: 1px;
+    left: 1px;
+    width: 18px;
+    height: 18px;
+  }
+
+  .ol-touch & {
+    display: none;
+  }
+
 }
