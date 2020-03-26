@@ -7,7 +7,11 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "build-bundle": "rescripts build",
+    "build-bundle": "rescripts build && npm run build-create-export",
+    "build-create-export": "npm run build-copy-js && npm run build-copy-css && npm run build-copy-media",
+    "build-copy-js": "fcli copy build/static/js/main.*.js build/export/js/main.js",
+    "build-copy-css": "fcli copy build/static/css/main.*.css build/export/css/main.css",
+    "build-copy-media": "fcli copy build/static/media/ build/export/media/",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
@@ -30,6 +34,7 @@
   "dependencies": {
     "axios": "^0.18.0",
     "d3-dsv": "^1.2.0",
+    "file-cli": "^1.2.0",
     "file-saver": "^2.0.2",
     "history": "^4.10.1",
     "immutable": "^3.8.2",
