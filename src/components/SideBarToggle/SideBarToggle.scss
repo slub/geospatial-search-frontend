@@ -30,17 +30,20 @@
   .digas-badge {
     position: absolute;
     top: -5px;
-    left: 34px;
-    min-width: 12px;
+    left: 32px;
     height: 12px;
     padding: 4px;
+    min-height: 20px;
+    min-width: 20px;
     font-size: 11px;
-    line-height: 13px;
+    line-height: 14px;
     font-weight: 600;
+    text-align: center;
     border-radius: 12px;
     background: $baseColor;
     color: white;
     box-shadow: 0 2px 8px rgba(0, 0, 0, .2);
+    box-sizing: border-box;
   }
 
   &.toggle-out {
