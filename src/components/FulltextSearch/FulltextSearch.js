@@ -4,12 +4,10 @@
  * This file is subject to the terms and conditions defined in
  * file 'LICENSE.txt', which is part of this source code package.
  */
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 import PropTypes from 'prop-types';
-import AddIcon from 'react-ionicons/lib/MdAdd';
-import CloseIcon from 'react-ionicons/lib/MdClose';
-import TrashIcon from 'react-ionicons/lib/MdTrash';
-
+import {ReactComponent as AddFilterIcon} from './addToFilter.svg';
+import {ReactComponent as RemoveAllFilterIcon} from './removeAllFilter.svg';
 import '../../_polyfills/array.find';
 import LangLabels from '../../views/MapView/components/Labels';
 import './FulltextSearch.scss';
@@ -29,11 +27,11 @@ export default class FulltextSearch extends Component {
    * @param {string} term
    */
   handleAddTerm = () => {
-    const { inputValue } = this.state;
+    const {inputValue} = this.state;
     this.setState(
-      { inputValue: '' },
+      {inputValue: ''},
       () => {
-        const { terms } = this.props;
+        const {terms} = this.props;
 
         // make sure that the given terms does not contain
         // the new term
@@ -51,15 +49,15 @@ export default class FulltextSearch extends Component {
    * Update the value of the input field.
    * @param {{ target: { value: * }}}
    */
-  handleChangeInput = ({ target }) => {
-    this.setState({ inputValue: target.value });
+  handleChangeInput = ({target}) => {
+    this.setState({inputValue: target.value});
   };
 
   handleClearInput = () => {
-    this.setState({ inputValue: '' });
+    this.setState({inputValue: ''});
   };
 
-  handleKeyDown = ({ key }) => {
+  handleKeyDown = ({key}) => {
     if (key === 'Enter') {
       this.handleAddTerm();
     }
@@ -78,15 +76,15 @@ export default class FulltextSearch extends Component {
    * @param {string} term
    */
   handleRemoveTerm = (term) => {
-    const { terms } = this.props;
+    const {terms} = this.props;
     this.props.onChange(
       terms.filter(t => t !== term),
     );
   };
 
-  render () {
-    const { inputValue } = this.state;
-    const { terms } = this.props;
+  render() {
+    const {inputValue} = this.state;
+    const {terms} = this.props;
 
     return (
       <div
@@ -105,22 +103,17 @@ export default class FulltextSearch extends Component {
           </div>
           <div className="add-input">
             <button onClick={this.handleAddTerm} title={LangLabels['geosearch.searchft.addterm']}>
-              <AddIcon fontSize="35px"/>
-            </button>
-          </div>
-          <div className="clear-input">
-            <button onClick={this.handleClearInput} title={LangLabels['geosearch.searchft.clear']}>
-              <CloseIcon fontSize="35px"/>
+              <AddFilterIcon/>
             </button>
           </div>
         </div>
         {
           terms.length > 0 && (
             <React.Fragment>
-              <div className="container-buttons">
+              <div className="remove-all-filter">
                 <button onClick={() => this.handleResetAllTerms()} title={LangLabels['geosearch.searchft.resetterms']}>
+                  <RemoveAllFilterIcon/>
                   <span>{LangLabels['geosearch.searchft.resetterms']}</span>
-                  <TrashIcon fontSize="16px"/>
                 </button>
               </div>
               <div className="container-terms">
@@ -130,9 +123,7 @@ export default class FulltextSearch extends Component {
                       return (
                         <div className="term-item" key={index}>
                           <span>{term}</span>
-                          <button onClick={() => this.handleRemoveTerm(term)} title={LangLabels['geosearch.searchft.delterm']}>
-                            <CloseIcon fontSize="16px"/>
-                          </button>
+                          <button onClick={() => this.handleRemoveTerm(term)} title={LangLabels['geosearch.searchft.delterm']}/>
                         </div>
                       )
                     }

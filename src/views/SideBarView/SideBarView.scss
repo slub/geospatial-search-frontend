@@ -75,7 +75,7 @@
           fill: $baseColor;
         }
 
-        &.order-list, &.only-public-docs {
+        &.order-list, &.only-public-docs, &.toggle-fulltextsearch {
           opacity: .5;
 
           &.active {
@@ -84,16 +84,6 @@
         }
       }
     }
-  }
-
-  .sidebar-fulltextsearch {
-    height: auto;
-    width: 100%;
-    position: relative;
-    font-size: 16px;
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: 15px;
   }
 
   .sidebar-content {
