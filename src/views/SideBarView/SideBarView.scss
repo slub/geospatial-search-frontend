@@ -144,10 +144,10 @@
   }
 
   @media screen and (min-width: $break-point-md) {
+    top: 0;
     bottom: 0;
     width: 33%;
-    padding-bottom: 24px;
-    box-shadow: none;
+    padding: 70px 0 24px 0;
     .sidebar-footer {
       position: absolute;
       right: 0;
