@@ -24,24 +24,24 @@ const MAP_STYLES = {
 	POINT: new Style({
 		image: new CircleStyle({
 			radius: 7,
-			fill: new Fill({ color: '#46a946' }),
+			fill: new Fill({ color: 'rgb(0,128,255)' }),
 			stroke: new Stroke({ color: '#fff', width: 1 })
 		})
 	}),
 	POINT_HIGHLIGHT: new Style({
 		image: new CircleStyle({
 			radius: 16,
-			fill: new Fill({ color: '#46a946' }),
+			fill: new Fill({ color: 'rgb(0,128,255)' }),
 			stroke: new Stroke({ color: '#fff', width: 2 })
 		})
 	}),
 	POLYGON: new Style({
 		stroke: new Stroke({
-			color: 'blue',
-			width: 3
+			color: 'rgb(0,128,255)',
+			width: 1
 		}),
 		fill: new Fill({
-			color: 'rgba(0, 0, 255, 0.1)'
+			color: 'rgba(0,128,255,.1)'
 		})
 	}),
 };
