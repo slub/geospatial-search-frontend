@@ -1,7 +1,37 @@
-.search-control {
-  top: 65px;
-  left: .5em;
+@import "../../../_sass/variables.scss";
+
+.ol-control button {
+  background: rgba(darken($baseColor, 10%), .8);
 }
-.ol-touch .search-control {
+
+.ol-zoom {
   top: 80px;
+  right: 10px;
+  left: auto;
+  @media screen and (min-width: $break-point-md) {
+    right: auto;
+    left: 10px;
+  }
+}
+
+.search-control {
+  top: 140px;
+  right: 10px;
+
+  svg {
+    position: relative;
+    top: 1px;
+    left: 1px;
+    width: 18px;
+    height: 18px;
+  }
+
+  .ol-touch & {
+    display: none;
+  }
+
+  @media screen and (min-width: $break-point-md) {
+    right: auto;
+    left: 10px;
+  }
 }

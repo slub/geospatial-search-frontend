@@ -6,9 +6,14 @@
  */
 import React, { Component, createRef } from 'react';
 import { addUrlProps, UrlQueryParamTypes } from 'react-url-query';
-import CloudDownloadIcon from 'react-ionicons/lib/MdCloudDownload';
-import PrintIcon from 'react-ionicons/lib/MdPrint';
-import ReorderIcon from 'react-ionicons/lib/MdReorder';
+import { ReactComponent as SortIcon } from './ControlIcons/sort.svg';
+import { ReactComponent as SearchIcon } from './ControlIcons/search.svg';
+import { ReactComponent as DownloadIcon } from './ControlIcons/download.svg';
+import { ReactComponent as GeoresearchIcon } from './ControlIcons/georesearch.svg';
+import { ReactComponent as LocalDocumentsIcon } from './ControlIcons/localdoc.svg';
+import { ReactComponent as AllDocumentsIcon } from './ControlIcons/alldoc.svg';
+import { ReactComponent as PrintIcon } from './ControlIcons/print.svg';
+import { ReactComponent as PublicDocumentsIcon } from './ControlIcons/public.svg';
 import { List } from 'immutable';
 import PropTypes from 'prop-types';
 import FileSaver from 'file-saver';
@@ -23,9 +28,6 @@ import './SideBarView.scss';
 // Global environmental settings for the solr
 const SOLR_MAXCOUNT = parseInt(process.env.REACT_APP_SOLR_MAXCOUNT, 10);
 const SHOW_THUMBNAILS = process.env.REACT_APP_FUNCTION_MAP_SHOW_THUMBNAILS === 'true';
-
-// Font-Size icon
-const FONT_SIZE_ICON = '30px';
 
 /**
  * Specify how the URL gets decoded here. This is an object that takes the prop
@@ -213,13 +215,13 @@ class SideBarView extends Component {
                       className={`digas-control order-list ${sorted ? 'active' : ''}`}
                       onClick={() => this.props.onUpdateSort(!sorted)}
                     >
-                      <ReorderIcon fontSize={FONT_SIZE_ICON}/>
+                      <SortIcon/>
                     </div>
                     <div title={ LangLabels['geosearch.publicdocs'] }
                       className={`digas-control only-public-docs ${fetchOnlyPublic ? 'active' : ''}`}
                       onClick={() => this.props.onUpdateFetchOnlyPublic(!fetchOnlyPublic)}
                     >
-                      <span>P</span>
+                      <PublicDocumentsIcon/>
                     </div>
                     <div title={
                       intersectOn
@@ -230,10 +232,9 @@ class SideBarView extends Component {
                          onClick={
                            () => this.props.onUpdateSpatialSearchMethod(intersectOn ? GEOM_METHOD.WITHIN : GEOM_METHOD.INTERSECTS)
                          }
-                    >
-                      <span>{
-                        intersectOn ? 'W' : 'I'
-                      }</span>
+                    >{
+                        intersectOn ? <LocalDocumentsIcon/> : <AllDocumentsIcon/>
+                      }
                     </div>
                     <div title={
                       fulltextSearchOpen
@@ -243,13 +244,13 @@ class SideBarView extends Component {
                       className={`digas-control toggle-fulltextsearch ${fulltextSearchOpen ? 'active' : ''}`}
                       onClick={() => this.props.onUpdateFulltextSearchOpen(!fulltextSearchOpen)}
                     >
-                      <span>F</span>
+                      <SearchIcon/>
                     </div>
                     <div title={ LangLabels['geosearch.exportcsv'] }
                       className="digas-control export-list"
                       onClick={this.handleExportCSV}
                     >
-                      <CloudDownloadIcon fontSize={FONT_SIZE_ICON}/>
+                      <DownloadIcon/>
                     </div>
                     <div title={ LangLabels['geosearch.print'] }
                       className={`digas-control print-list ${docs.length > 0 ? 'active' : ''}`}
@@ -259,7 +260,7 @@ class SideBarView extends Component {
                         }
                       }}
                     >
-                      <PrintIcon fontSize={FONT_SIZE_ICON}/>
+                      <PrintIcon/>
                     </div>
                   </React.Fragment>
                 )

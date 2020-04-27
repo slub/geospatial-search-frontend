@@ -1,0 +1,29 @@
+# top-most EditorConfig file
+root = true
+
+# Unix-style newlines with a newline ending every file
+[*]
+charset = utf-8
+end_of_line = lf
+insert_final_newline = false
+trim_trailing_whitespace = true
+
+# SASS-Files
+[*.scss]
+indent_style = space
+indent_size = 2
+
+# JS-Files
+[*.js]
+indent_style = space
+indent_size = 2
+
+# MD-Files
+[*.md]
+indent_style = space
+indent_size = 4
+
+# package.json, composer.json or .travis.yml
+[{package.json, composer.json, .travis.yml}]
+indent_style = space
+indent_size = 2

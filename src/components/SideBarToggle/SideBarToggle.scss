@@ -1,11 +1,11 @@
 @import "../../_sass/variables.scss";
 
 .digas-sidebar-toggle {
-  width: 50px;
-  height: 50px;
+  width: 35px;
+  height: 35px;
   padding: 5px;
-  background: hsla(0,0%,100%,.95);
-  box-shadow: 4px 4px 2px -2px rgba(0,0,0,.2);
+  background: hsla(0, 0%, 100%, .9);
+  box-shadow: 4px 4px 2px -2px rgba(0, 0, 0, .2);
   display: block;
   position: absolute;
   bottom: 50%;
@@ -13,30 +13,50 @@
   @include transform(translateX(0));
   @include transition(all .2s ease-out);
 
+  &:before {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 12px;
+    height: 12px;
+    margin: -8px 0 0 -8px;
+    border: solid $baseColor;
+    border-width: 0 0 6px 6px;
+    content: " ";
+    @include transform(rotate(45deg));
+    @include transition(all .2s ease-out);
+  }
+
   .digas-badge {
     position: absolute;
-    top: 2px;
-    left: 34px;
-    min-width: 16px;
+    top: -5px;
+    left: 25px;
     height: 12px;
-    padding: 2px 3px 2px 4px;
+    padding: 4px;
+    min-height: 20px;
+    min-width: 20px;
     font-size: 11px;
-    line-height: 11px;
+    line-height: 14px;
     font-weight: 600;
-    background: transparent;
-    color: black;
+    text-align: center;
+    border-radius: 12px;
+    background: $baseColor;
+    color: white;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, .2);
+    box-sizing: border-box;
   }
-}
 
-@media screen and (max-width: $break-point-xs) {
-  .digas-sidebar-toggle {
-    &.toggle-out {
-      left: 0;
+  &.toggle-out {
+    left: 0;
+
+    &:before {
+      margin-left: -14px;
+      @include transform(rotate(-135deg));
     }
-    &.toggle-in {
-      top: 5px;
-      right: 10px;
-    }
+  }
+
+  &.toggle-in {
+    left: 85%;
   }
 }
 
@@ -45,6 +65,7 @@
     &.toggle-out {
       left: 0;
     }
+
     &.toggle-in {
       left: 450px;
     }
@@ -56,6 +77,7 @@
     &.toggle-out {
       left: 0;
     }
+
     &.toggle-in {
       left: 33%;
       display: none;
@@ -68,9 +90,11 @@
     &.toggle-out {
       left: 0;
     }
+
     &.toggle-in {
       left: 25%;
       display: none;
-    };
+    }
+  ;
   }
 }

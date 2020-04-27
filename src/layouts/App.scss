@@ -1,15 +1,18 @@
 @import "../_sass/variables.scss";
 
+body {
+  margin: 0;
+}
+
 .digas-root {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
   display: block;
-  //position: absolute;
-  //top: 12px;
-  //right: 0;
-  //bottom: 12px;
-  //left: 0;
-  width: 100%;
   background: #fff;
-  box-shadow: 0 3px 8px rgba(0,0,0,0.2);
-  //overflow: hidden;
   pointer-events: all;
+  overflow: hidden;
+  font-family: Helvetica, Arial, sans-serif;
 }

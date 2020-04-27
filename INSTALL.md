@@ -32,8 +32,8 @@ This will produce the following files:
 
 This will produce the following files:
 
-* `build/static/css/main.*.css`
-* `build/static/js/main.*.js`
+* `build/export/css/main.css`
+* `build/export/js/main.js`
 
 These files can be embedded into a HTML-Page like this:
 
@@ -41,11 +41,11 @@ These files can be embedded into a HTML-Page like this:
 <!doctype html>
 <html lang="en">
    <head>
-      <link href="/static/css/main.0bd96208.css" rel="stylesheet">
+      <link href="/static/css/main.css" rel="stylesheet">
    </head>
    <body>
       <div id="root"></div>
-      <script src="/static/js/main.b05fec78.js"></script>
+      <script src="/static/js/main.js"></script>
    </body>
 </html>
 ```

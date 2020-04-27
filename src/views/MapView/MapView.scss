@@ -13,15 +13,22 @@
 
   .ol-zoom, .search-control {
     @include transition(all .2s ease-out);
+
     > button {
       cursor: pointer;
     }
   }
 
   .ol-scale-line {
-    right: 150px;
+    right: 155px;
     left: auto;
     bottom: 2px;
+    background: rgba(darken($baseColor,10%),.6);
+  }
+  .ol-attribution {
+    ul, ul li a {
+      color: #999;
+    }
   }
 
   &.background {
@@ -47,13 +54,13 @@
 
 @media screen and (min-width: $break-point-md) and (max-width: $break-point-lg) {
   .digas-view-map {
-      left: 33%;
+    left: 33%;
   }
 }
 
 @media screen and (min-width: $break-point-lg) {
   .digas-view-map {
-      left: 25%;
+    left: 25%;
   }
 }
 
