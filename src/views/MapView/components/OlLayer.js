@@ -64,7 +64,6 @@ export default class OlLayer extends Component {
 	/**
 	 * Listeners which is used for click interactions
 	 * @param {{
-	 *   coordinate: [number, number]
 	 *   pixel: [number, number],
 	 * }}
 	 */

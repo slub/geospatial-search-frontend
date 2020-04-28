@@ -264,6 +264,8 @@ export class MapView extends Component {
             <OlPopup
               className="digas-documents-popup"
               label={LangLabels['geosearch.searchresultsfound'].replace('%i', selectDocuments.length)}
+              // we do not want any animation (moving the center causes new search which is not desired)
+              /*
               onMount={() => {
                 // and focus map to the document
                 map.getView().animate({
@@ -271,6 +273,7 @@ export class MapView extends Component {
                   duration: 500
                 });
               }}
+              */
               onClose={() => this.props.onUpdateSelectDocuments([])}
             >
               <div className="documents-picker">
