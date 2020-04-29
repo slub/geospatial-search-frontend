@@ -152,6 +152,7 @@ class SideBarView extends Component {
     const {
       className,
       maxDocuments,
+      fetchOnlyMaps,
       fetchOnlyPublic,
       fulltextSearchOpen,
       fulltextSearchTerms,
@@ -216,6 +217,12 @@ class SideBarView extends Component {
                       onClick={() => this.props.onUpdateSort(!sorted)}
                     >
                       <SortIcon/>
+                    </div>
+                    <div title={ LangLabels['geosearch.onlymaps'] }
+                      className={`digas-control only-maps ${fetchOnlyMaps ? 'active' : ''}`}
+                      onClick={() => this.props.onUpdateFetchOnlyMaps(!fetchOnlyMaps)}
+                    >
+                      <GeoresearchIcon/>
                     </div>
                     <div title={ LangLabels['geosearch.publicdocs'] }
                       className={`digas-control only-public-docs ${fetchOnlyPublic ? 'active' : ''}`}
@@ -334,6 +341,7 @@ SideBarView.defaultProps = {
   className: '',
   documents: [],
   fetchOnlyPublic: false,
+  fetchOnlyMaps: false,
   fulltextSearchOpen: false,
   fulltextSearchTerms: [],
   maxDocuments: 0,
@@ -345,6 +353,7 @@ SideBarView.defaultProps = {
 SideBarView.propTypes = {
   className: PropTypes.string,
   documents: PropTypes.instanceOf(List),
+  fetchOnlyMaps: PropTypes.bool,
   fetchOnlyPublic: PropTypes.bool,
   fulltextSearchOpen: PropTypes.bool,
   fulltextSearchTerms: PropTypes.arrayOf(
@@ -353,6 +362,7 @@ SideBarView.propTypes = {
   maxDocuments: PropTypes.number,
   onClose: PropTypes.func,
   onMount: PropTypes.func,
+  onUpdateFetchOnlyMaps: PropTypes.func.isRequired,
   onUpdateFetchOnlyPublic: PropTypes.func.isRequired,
   onUpdateFocusDocument: PropTypes.func.isRequired,
   onUpdateFulltextSearchOpen: PropTypes.func.isRequired,

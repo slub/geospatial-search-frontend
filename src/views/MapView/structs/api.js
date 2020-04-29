@@ -77,6 +77,7 @@ export function fixExtent(extent) {
  * and cancel connection functions for preventing to much unnecessary http connections.
  *
  * @param {[minLon, minLat, maxLon, maxLat]} extent
+ * @param {boolean} fetchOnlyMaps
  * @param {boolean} fetchOnlyPublic
  * @param {string[]} fulltextSearchTerms
  * @param {string} spatialSearchMethod
@@ -84,6 +85,7 @@ export function fixExtent(extent) {
  */
 export function fetchDocuments(
 	extent,
+	fetchOnlyMaps,
 	fetchOnlyPublic,
 	fulltextSearchTerms,
 	spatialSearchMethod,
@@ -123,6 +125,7 @@ export function fetchDocuments(
 	// http://localhost:8983/solr/digas-v3/select?&q=*:*&fq=geom:[50.861,14.743 TO 50.926,14.846]
 	const url = `${SOLR_ENDPOINT}/` +
 		`${SOLR_INDEX}/select?q=*:*&${getSpatialFitler(adjustExtent, spatialSearchMethod)}` +
+		`${fetchOnlyMaps ? '&fq=type:map' : ''}` +
 		`${fetchOnlyPublic ? '&fq=accessCondition_uui:nein' : ''}` +
 		`${fulltextQuery.length > 0 ? '&fq=*' + fulltextQuery : ''}` +
 		`&start=0&rows=${SOLR_MAXCOUNT}`;

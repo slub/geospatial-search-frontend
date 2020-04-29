@@ -36,6 +36,7 @@ const SOLR_GEOM_METHOD = process.env.REACT_APP_SOLR_GEOM_METHOD;
  * action.
  */
 const urlPropsQueryConfig = {
+  fetchOnlyMaps: { type: UrlQueryParamTypes.boolean, queryParam: 'searchMaps' },
   fetchOnlyPublic: { type: UrlQueryParamTypes.boolean, queryParam: 'searchPublic' },
   fulltextSearchTerms: { type: UrlQueryParamTypes.string, queryParam: 'searchTerms' },
   sorted: { type: UrlQueryParamTypes.boolean, queryParam: 'sorted' },
@@ -50,6 +51,9 @@ class App extends Component {
     this.state = {
       // Result set of search documents
       documents: List([]),
+
+      // Signals if only map documents should be fetched
+      fetchOnlyMaps: props.fetchOnlyMaps !== undefined ? props.fetchOnlyMaps : false,
 
       // Signals if only public documents should be fetched
       fetchOnlyPublic: props.fetchOnlyPublic !== undefined ? props.fetchOnlyPublic : false,
@@ -114,6 +118,13 @@ class App extends Component {
         { selectDocuments: [] },
       )
     );
+  };
+
+  handleFetchOnlyMapsUpdate = (newFetchOnlyMaps) => {
+    this.setState({ fetchOnlyMaps: newFetchOnlyMaps });
+
+    // update the query parameters for fetchOnlyMaps
+    this.props.onChangeFetchOnlyMaps(newFetchOnlyMaps);
   };
 
   handleFetchOnlyPublicUpdate = (newFetchOnlyPublic) => {
@@ -182,6 +193,7 @@ class App extends Component {
   render() {
     const {
       documents,
+      fetchOnlyMaps,
       fetchOnlyPublic,
       focusDocument,
       fulltextSearchOpen,
@@ -199,6 +211,7 @@ class App extends Component {
       <div className="digas-root">
         <MapView
           className={"front"}
+          fetchOnlyMaps={fetchOnlyMaps}
           fetchOnlyPublic={fetchOnlyPublic}
           fulltextSearchTerms={fulltextSearchTerms}
           focusDocument={focusDocument}
@@ -216,12 +229,14 @@ class App extends Component {
         />
         <SideBarView
           documents={documents}
+          fetchOnlyMaps={fetchOnlyMaps}
           fetchOnlyPublic={fetchOnlyPublic}
           fulltextSearchOpen={fulltextSearchOpen}
           fulltextSearchTerms={fulltextSearchTerms}
           maxDocuments={maxDocuments}
           onClose={() => this.handleSidebarToggle(false)}
           onMount={(offsetWidth) => this.setState({ offsetWidth: offsetWidth })}
+          onUpdateFetchOnlyMaps={this.handleFetchOnlyMapsUpdate}
           onUpdateFetchOnlyPublic={this.handleFetchOnlyPublicUpdate}
           onUpdateFocusDocument={this.handleFocusDocumentUpdate}
           onUpdateFulltextSearchOpen={this.handleFulltextSearchToggle}
@@ -249,6 +264,7 @@ class App extends Component {
 }
 
 App.propTypes = {
+  fetchOnlyMaps: PropTypes.bool,
   fetchOnlyPublic: PropTypes.bool,
   fulltextSearchTerms: PropTypes.string,
   sorted: PropTypes.bool,

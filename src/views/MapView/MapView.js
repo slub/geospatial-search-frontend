@@ -76,18 +76,20 @@ export class MapView extends Component {
    * React life-cycle method, which is called after the component has updated the
    * internal state or the props.
    * @param {{
-   *   fetchOnlyPublic: boolean
+   *   fetchOnlyMaps: boolean,
+   *   fetchOnlyPublic: boolean,
    *   fulltextSearchTerms: string[],
    *   spatialSearchMethod: string,
    * }} prevProps
    */
   componentDidUpdate(prevProps) {
     if (
+      prevProps.fetchOnlyMaps !== this.props.fetchOnlyMaps ||
       prevProps.fetchOnlyPublic !== this.props.fetchOnlyPublic ||
       prevProps.fulltextSearchTerms.length !== this.props.fulltextSearchTerms.length ||
       prevProps.spatialSearchMethod !== this.props.spatialSearchMethod
     ) {
-      // In this case the fetchOnlyPublic or fulltextSearchTerms has been updated
+      // In this case the fetchOnlyMaps, fetchOnlyPublic or fulltextSearchTerms has been updated
       // and we want to trigger a new document search.
       this.updateDocuments();
     }
@@ -100,7 +102,7 @@ export class MapView extends Component {
    */
   updateDocuments = (extent = undefined) => {
     const { map, mapView } = this.state;
-    const { fetchOnlyPublic, fulltextSearchTerms, spatialSearchMethod } = this.props;
+    const { fetchOnlyMaps, fetchOnlyPublic, fulltextSearchTerms, spatialSearchMethod } = this.props;
     // if we do not use the sidebar toggle feature, offsetwith is always 0
     const { offsetWidth } = '0'; //this.props;
 
@@ -119,6 +121,7 @@ export class MapView extends Component {
 
       fetchDocuments(
         searchExtent,
+        fetchOnlyMaps,
         fetchOnlyPublic,
         fulltextSearchTerms,
         spatialSearchMethod,
@@ -306,6 +309,7 @@ export class MapView extends Component {
 
 MapView.defaultProps = {
   className: '',
+  fetchOnlyMaps: false,
   fetchOnlyPublic: false,
   fulltextSearchTerms: [],
   focusDocument: undefined,
@@ -315,6 +319,7 @@ MapView.defaultProps = {
 
 MapView.propTypes = {
   className: PropTypes.string,
+  fetchOnlyMaps: PropTypes.bool,
   fetchOnlyPublic: PropTypes.bool,
   fulltextSearchTerms: PropTypes.arrayOf(
     PropTypes.string,
