@@ -115,8 +115,8 @@ export function fetchDocuments(
 		? fulltextSearchTerms.reduce(
 			(acc, currVal, currInd) => {
 				return currInd < fulltextSearchTerms.length - 1
-					? `${acc}"${currVal}" OR `
-					: `${acc}"${currVal}"`;
+					? `${acc}${currVal}* AND `
+					: `${acc}${currVal}*`;
 			},
 			'',
 		) : '';
@@ -127,7 +127,7 @@ export function fetchDocuments(
 		`${SOLR_INDEX}/select?q=*:*&${getSpatialFitler(adjustExtent, spatialSearchMethod)}` +
 		`${fetchOnlyMaps ? '&fq=type:map' : ''}` +
 		`${fetchOnlyPublic ? '&fq=accessCondition_uui:nein' : ''}` +
-		`${fulltextQuery.length > 0 ? '&fq=*' + fulltextQuery : ''}` +
+		`${fulltextQuery.length > 0 ? '&fq=' + fulltextQuery : ''}` +
 		`&start=0&rows=${SOLR_MAXCOUNT}`;
 
 	// Create the request
