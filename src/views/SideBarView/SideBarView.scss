@@ -70,6 +70,7 @@
         cursor: pointer;
         width: 35px;
         height: 35px;
+        padding: 5px 0;
 
         svg {
           fill: $baseColor;
@@ -131,8 +132,13 @@
     &.toggle-in {
       width: 85%;
     }
-    .sidebar-header {
-      display: none;
+    .sidebar-header .controls {
+      .digas-control {
+        &.print-list,
+        &.export-list {
+          display: none;
+        }
+      }
     }
   }
 
