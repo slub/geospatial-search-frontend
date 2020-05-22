@@ -2,24 +2,54 @@
 
 .digas-popup-container {
   position: absolute;
-  top: 40%;
-  left: 50%;
-  right: auto;
-  bottom: auto;
+  top: 80px;
+  right: 15px;
+  left: 15px;
+  max-height: calc(100vh - 100px);
   overflow: auto;
   outline: none;
-  padding: 20px;
-  transform: translate(-50%, -50%);
-  box-shadow: 0 3px 5px -1px rgba(0,0,0,0.2), 0px 5px 8px 0px rgba(0,0,0,0.14), 0px 1px 14px 0px rgba(0,0,0,0.12);
-  background-color: #fff;
+  font-family: Helvetica, Arial, sans-serif;
+  @include transform(translateX(0));
+  @include transition(all .2s ease-out);
+  background: rgba(255, 255, 255, 0.9);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, .5);
 
-  @media screen and (max-width: $break-point-xs) {
-    top: 15%;
+  .header {
+    padding: 10px 20px;
+
+    > h3 {
+      margin: 0;
+      font-size: 12px;
+      font-weight: bold;
+      text-transform: uppercase;
+      color: rgb(102, 102, 102);
+
+      &.warning {
+        color: rgb(255, 51, 51);
+      }
+    }
   }
-}
 
-.digas-popup-content {
-  width: 350px;
+  a.list-element {
+    &:nth-child(odd) {
+      > div {
+        background-color: rgba(0, 128, 255, .1);
+      }
+    }
+  }
+
+  @media screen and (min-width: $break-point-xs) {
+    top: 120px;
+    right: 80px;
+    left: 80px;
+  }
+  @media screen and (min-width: $break-point-md) {
+    right: auto;
+    left: 50%;
+    margin-left: -250px;
+    width: 500px;
+    max-height: 600px;
+  }
 }
 
 .digas-popup-overlay {
@@ -28,7 +58,9 @@
   left: 0;
   right: 0;
   bottom: 0;
-  background-color: rgba(0, 0, 0, 0.5);
+  background: rgba(darken($baseColor, 25%), .5);
   -webkit-tap-highlight-color: transparent;
   touch-action: none;
+  -webkit-backdrop-filter: blur(3px);
+  backdrop-filter: blur(3px);
 }
