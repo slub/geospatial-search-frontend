@@ -4,22 +4,22 @@
  * This file is subject to the terms and conditions defined in
  * file 'LICENSE.txt', which is part of this source code package.
  */
-import React, { Component, createRef } from 'react';
-import { addUrlProps, UrlQueryParamTypes } from 'react-url-query';
-import { ReactComponent as SortIcon } from './ControlIcons/sort.svg';
-import { ReactComponent as SearchIcon } from './ControlIcons/search.svg';
-import { ReactComponent as DownloadIcon } from './ControlIcons/download.svg';
-import { ReactComponent as GeoresearchIcon } from './ControlIcons/georesearch.svg';
-import { ReactComponent as LocalDocumentsIcon } from './ControlIcons/localdoc.svg';
-import { ReactComponent as AllDocumentsIcon } from './ControlIcons/alldoc.svg';
-import { ReactComponent as PrintIcon } from './ControlIcons/print.svg';
-import { ReactComponent as PublicDocumentsIcon } from './ControlIcons/public.svg';
-import { List } from 'immutable';
+import React, {Component, createRef} from 'react';
+import {addUrlProps, UrlQueryParamTypes} from 'react-url-query';
+import {ReactComponent as SortIcon} from './ControlIcons/sort.svg';
+import {ReactComponent as SearchIcon} from './ControlIcons/search.svg';
+import {ReactComponent as DownloadIcon} from './ControlIcons/download.svg';
+import {ReactComponent as GeoresearchIcon} from './ControlIcons/georesearch.svg';
+import {ReactComponent as LocalDocumentsIcon} from './ControlIcons/localdoc.svg';
+import {ReactComponent as AllDocumentsIcon} from './ControlIcons/alldoc.svg';
+import {ReactComponent as PrintIcon} from './ControlIcons/print.svg';
+import {ReactComponent as PublicDocumentsIcon} from './ControlIcons/public.svg';
+import {List} from 'immutable';
 import PropTypes from 'prop-types';
 import FileSaver from 'file-saver';
-import { BREAK_POINT_XS } from '../../settings';
-import { GEOM_METHOD } from '../../views/MapView/structs/api';
-import { parseAsCSV } from '../../views/MapView/structs/parser';
+import {BREAK_POINT_XS} from '../../settings';
+import {GEOM_METHOD} from '../MapView/structs/api';
+import {parseAsCSV} from '../MapView/structs/parser';
 import LangLabels from '../../views/MapView/components/Labels';
 import ListItem from '../../components/ListItem/ListItem';
 import FulltextSearch from '../../components/FulltextSearch/FulltextSearch';
@@ -40,7 +40,7 @@ const SHOW_THUMBNAILS = process.env.REACT_APP_FUNCTION_MAP_SHOW_THUMBNAILS === '
  * action.
  */
 const urlPropsQueryConfig = {
-  documentId: { type: UrlQueryParamTypes.string, queryParam: 'doc' },
+  documentId: {type: UrlQueryParamTypes.string, queryParam: 'doc'},
 };
 
 /**
@@ -75,17 +75,17 @@ class SideBarView extends Component {
   }
 
   componentDidUpdate(prevProps) {
-    const { focusStartId, focusEndId } = this.state;
-    const { refs } = this.state;
+    const {focusStartId, focusEndId} = this.state;
+    const {refs} = this.state;
 
     if (!prevProps.documents.equals(this.props.documents)) {
       const newDocs = this.props.documents.toArray();
       const newRefs = createRefs_(newDocs);
       this.setState(
         Object.assign(
-          { docs: newDocs, refs: newRefs },
+          {docs: newDocs, refs: newRefs},
           focusStartId === undefined && focusEndId !== undefined
-            ? { focusEndId: undefined }
+            ? {focusEndId: undefined}
             : {},
         ),
       );
@@ -95,7 +95,7 @@ class SideBarView extends Component {
     if (focusStartId !== undefined && refs[focusStartId] !== undefined) {
       if (refs[focusStartId].current !== null) {
         this.setState(
-          { focusStartId: undefined, focusEndId: focusStartId },
+          {focusStartId: undefined, focusEndId: focusStartId},
           () => {
             refs[focusStartId].current.scrollIntoView({
               behavior: 'smooth',
@@ -107,15 +107,15 @@ class SideBarView extends Component {
     }
   }
 
-  componentDidMount () {
-    const { refSidebar } = this.state;
+  componentDidMount() {
+    const {refSidebar} = this.state;
 
     if (this.props.onMount) {
       this.props.onMount(refSidebar.current.offsetWidth);
     }
   }
 
-  handleClick = (id, { purl }) => {
+  handleClick = (id, {purl}) => {
     // Is a synchrone action
     this.props.onChangeDocumentId(id);
 
@@ -124,7 +124,7 @@ class SideBarView extends Component {
   };
 
   handleExportCSV = () => {
-    const { documents } = this.props;
+    const {documents} = this.props;
 
     // Create the CSV string
     const csvString = parseAsCSV(
@@ -132,7 +132,7 @@ class SideBarView extends Component {
     );
 
     // Save and Download it
-    const blob = new Blob([csvString], { type: 'data:text/csv;charset=utf-8' });
+    const blob = new Blob([csvString], {type: 'data:text/csv;charset=utf-8'});
 
     var saveTime = new Date();
     FileSaver.saveAs(blob, "searchresults-" + saveTime.getTime() + ".csv");
@@ -148,7 +148,7 @@ class SideBarView extends Component {
     }
   };
 
-  render () {
+  render() {
     const {
       className,
       maxDocuments,
@@ -210,67 +210,65 @@ class SideBarView extends Component {
           <div className="sidebar-header">
             <div className="controls">
               {
-                window.innerWidth >= BREAK_POINT_XS && (
-                  <React.Fragment>
-                    <div title={ LangLabels['geosearch.sort'] }
-                      className={`digas-control order-list ${sorted ? 'active' : ''}`}
-                      onClick={() => this.props.onUpdateSort(!sorted)}
-                    >
-                      <SortIcon/>
-                    </div>
-                    <div title={ LangLabels['geosearch.onlymaps'] }
-                      className={`digas-control only-maps ${fetchOnlyMaps ? 'active' : ''}`}
-                      onClick={() => this.props.onUpdateFetchOnlyMaps(!fetchOnlyMaps)}
-                    >
-                      <GeoresearchIcon/>
-                    </div>
-                    <div title={ LangLabels['geosearch.publicdocs'] }
-                      className={`digas-control only-public-docs ${fetchOnlyPublic ? 'active' : ''}`}
-                      onClick={() => this.props.onUpdateFetchOnlyPublic(!fetchOnlyPublic)}
-                    >
-                      <PublicDocumentsIcon/>
-                    </div>
-                    <div title={
-                      intersectOn
-                        ? LangLabels['geosearch.spatialsearchwithin']
-                        : LangLabels['geosearch.spatialsearchintersects']
+                <React.Fragment>
+                  <div title={LangLabels['geosearch.sort']}
+                    className={`digas-control order-list ${sorted ? 'active' : ''}`}
+                    onClick={() => this.props.onUpdateSort(!sorted)}
+                  >
+                    <SortIcon/>
+                  </div>
+                  <div title={LangLabels['geosearch.onlymaps']}
+                    className={`digas-control only-maps ${fetchOnlyMaps ? 'active' : ''}`}
+                    onClick={() => this.props.onUpdateFetchOnlyMaps(!fetchOnlyMaps)}
+                  >
+                    <GeoresearchIcon/>
+                  </div>
+                  <div title={LangLabels['geosearch.publicdocs']}
+                    className={`digas-control only-public-docs ${fetchOnlyPublic ? 'active' : ''}`}
+                    onClick={() => this.props.onUpdateFetchOnlyPublic(!fetchOnlyPublic)}
+                  >
+                    <PublicDocumentsIcon/>
+                  </div>
+                  <div title={
+                    intersectOn
+                      ? LangLabels['geosearch.spatialsearchwithin']
+                      : LangLabels['geosearch.spatialsearchintersects']
+                  }
+                    className={`digas-control select-spatial-search ${spatialSearchMethod}`}
+                    onClick={
+                      () => this.props.onUpdateSpatialSearchMethod(intersectOn ? GEOM_METHOD.WITHIN : GEOM_METHOD.INTERSECTS)
+                    }
+                  >{
+                    intersectOn ? <LocalDocumentsIcon/> : <AllDocumentsIcon/>
+                  }
+                  </div>
+                  <div title={
+                    fulltextSearchOpen
+                      ? LangLabels['geosearch.searchft.close']
+                      : LangLabels['geosearch.searchft.open']
+                  }
+                    className={`digas-control toggle-fulltextsearch ${fulltextSearchOpen ? 'active' : ''}`}
+                    onClick={() => this.props.onUpdateFulltextSearchOpen(!fulltextSearchOpen)}
+                  >
+                    <SearchIcon/>
+                  </div>
+                  <div title={LangLabels['geosearch.exportcsv']}
+                    className="digas-control export-list"
+                    onClick={this.handleExportCSV}
+                  >
+                    <DownloadIcon/>
+                  </div>
+                  <div title={LangLabels['geosearch.print']}
+                    className={`digas-control print-list ${docs.length > 0 ? 'active' : ''}`}
+                    onClick={() => {
+                      if (docs.length > 0) {
+                        this.props.onUpdatePrintDialog(!printDialogOpen);
                       }
-                         className={`digas-control select-spatial-search ${spatialSearchMethod}`}
-                         onClick={
-                           () => this.props.onUpdateSpatialSearchMethod(intersectOn ? GEOM_METHOD.WITHIN : GEOM_METHOD.INTERSECTS)
-                         }
-                    >{
-                        intersectOn ? <LocalDocumentsIcon/> : <AllDocumentsIcon/>
-                      }
-                    </div>
-                    <div title={
-                      fulltextSearchOpen
-                        ? LangLabels['geosearch.searchft.close']
-                        : LangLabels['geosearch.searchft.open']
-                      }
-                      className={`digas-control toggle-fulltextsearch ${fulltextSearchOpen ? 'active' : ''}`}
-                      onClick={() => this.props.onUpdateFulltextSearchOpen(!fulltextSearchOpen)}
-                    >
-                      <SearchIcon/>
-                    </div>
-                    <div title={ LangLabels['geosearch.exportcsv'] }
-                      className="digas-control export-list"
-                      onClick={this.handleExportCSV}
-                    >
-                      <DownloadIcon/>
-                    </div>
-                    <div title={ LangLabels['geosearch.print'] }
-                      className={`digas-control print-list ${docs.length > 0 ? 'active' : ''}`}
-                      onClick={() => {
-                        if (docs.length > 0) {
-                          this.props.onUpdatePrintDialog(!printDialogOpen);
-                        }
-                      }}
-                    >
-                      <PrintIcon/>
-                    </div>
-                  </React.Fragment>
-                )
+                    }}
+                  >
+                    <PrintIcon/>
+                  </div>
+                </React.Fragment>
               }
             </div>
           </div>
@@ -285,16 +283,16 @@ class SideBarView extends Component {
             )
           }
           <div className="search-feedback">
-              {
-                docs.length >= SOLR_MAXCOUNT
-                  ? (<p className="warning">
+            {
+              docs.length >= SOLR_MAXCOUNT
+                ? (<p className="warning">
                     {LangLabels['geosearch.searchresultsmax'].replace('%i', SOLR_MAXCOUNT)}
-                    </p>
-                  ) : (<p>
+                  </p>
+                ) : (<p>
                     {LangLabels['geosearch.searchresultsfound'].replace('%i', docs.length)}
-                    </p>
-                  )
-              }
+                  </p>
+                )
+            }
           </div>
           <div className="sidebar-content">
             <ul>
@@ -380,4 +378,4 @@ SideBarView.propTypes = {
 /**
  * Use the addUrlProps higher-order component to hook-in react-url-query.
  */
-export default addUrlProps({ urlPropsQueryConfig })(SideBarView);
+export default addUrlProps({urlPropsQueryConfig})(SideBarView);

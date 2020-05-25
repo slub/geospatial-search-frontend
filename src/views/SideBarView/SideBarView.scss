@@ -62,7 +62,7 @@
     .controls {
       justify-content: space-between;
       border-bottom: 1px solid #eee;
-      padding: 0 10px;
+      padding: 5px 10px;
 
 
       .digas-control {
@@ -131,8 +131,13 @@
     &.toggle-in {
       width: 85%;
     }
-    .sidebar-header {
-      display: none;
+    .sidebar-header .controls {
+      .digas-control {
+        &.print-list,
+        &.export-list {
+          display: none;
+        }
+      }
     }
   }
 

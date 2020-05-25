@@ -23,8 +23,9 @@
     right: 155px;
     left: auto;
     bottom: 2px;
-    background: rgba(darken($baseColor,10%),.6);
+    background: rgba(darken($baseColor, 10%), .6);
   }
+
   .ol-attribution {
     ul, ul li a {
       color: #999;
@@ -61,37 +62,5 @@
 @media screen and (min-width: $break-point-lg) {
   .digas-view-map {
     left: 25%;
-  }
-}
-
-.digas-documents-popup {
-  padding: 0;
-  top: 30%;
-
-  .documents-picker {
-    .header {
-      padding: 10px 0;
-      text-align: left;
-      border-bottom: 1px solid #333;
-
-      > h3 {
-        padding-left: 5px;
-      }
-    }
-
-    .content {
-      padding: 5px;
-      max-height: 300px;
-      overflow-y: scroll;
-      overflow-x: hidden;
-
-      .list-element {
-        > div:hover {
-          background-color: #eee;
-          text-decoration: none;
-          cursor: pointer;
-        }
-      }
-    }
   }
 }
