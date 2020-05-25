@@ -45,7 +45,7 @@ export function parseAsCSV(rawDocuments) {
 	);
 
 	// create the csv
-	let csvContent = "Katalogsignatur, Titel, Datensatz-Identifier\ns";
+	let csvContent = "Katalogsignatur, Titel, Datensatz-Identifier\n";
   //let csvContent = keys.join(",") + "\n";
 	csvContent += csvFormatRows(rows);
 	return csvContent;
