@@ -13,8 +13,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { addUrlProps } from 'react-url-query';
-import PrintIcon from 'react-ionicons/lib/MdPrint';
-import CloseIcon from 'react-ionicons/lib/MdClose';
+import { PrintOutline } from 'react-ionicons';
+import { CloseOutline } from 'react-ionicons';
 import ListItem from '../../components/ListItem/ListItem';
 import { extentUrlType } from '../MapView/structs/types';
 import './PrintView.scss';
@@ -89,17 +89,25 @@ export class PrintView extends Component {
             }
           </div>
           <div className="controls">
-            <div title="Drucken"
-              className={`digas-control`}
+            <div className={`digas-control`}
               onClick={this.handlePrintStart}
             >
-              <PrintIcon fontSize="35px"/>
+              <PrintOutline
+                color={'#00000'}
+                title={'Drucken'}
+                height="35px"
+                width="35px"
+              />
             </div>
-            <div title="Schließe Print-Dialog"
-                 className={`digas-control`}
+            <div className={`digas-control`}
                  onClick={() => this.props.onUpdatePrintDialog(false)}
             >
-              <CloseIcon fontSize="35px"/>
+              <CloseOutline
+                color={'#00000'}
+                title={'Schließe Print-Dialog'}
+                height="35px"
+                width="35px"
+              />
             </div>
           </div>
         </div>
