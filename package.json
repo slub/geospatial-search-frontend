@@ -24,11 +24,11 @@
   },
   "homepage": "/typo3conf/ext/slub_web_digas/Resources/Public/GeoSearch",
   "devDependencies": {
-    "@rescripts/cli": "0.0.10",
+    "@rescripts/cli": "0.0.16",
     "enzyme": "^3.11.0",
     "enzyme-adapter-react-16": "^1.15.2",
-    "node-sass": "^7.0.0",
     "redux-mock-store": "^1.5.4",
+    "sass": "^1.49.9",
     "source-map-explorer": "^1.6.0"
   },
   "dependencies": {
@@ -42,12 +42,12 @@
     "lodash.round": "^4.0.4",
     "ol": "^5.3.3",
     "prop-types": "^15.7.2",
-    "react": "^16.13.1",
-    "react-dom": "^16.13.1",
+    "react": "^16.4",
+    "react-dom": "^16.4",
     "react-ionicons": "^3.1.4",
     "react-lazy-load-image-component": "^1.4.3",
     "react-modal": "^3.11.2",
-    "react-scripts": "2.1.8",
+    "react-scripts": "4.0.2",
     "react-url-query": "^1.5.0"
   },
   "eslintConfig": {
