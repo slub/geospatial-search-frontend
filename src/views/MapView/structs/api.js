@@ -7,7 +7,10 @@
 import axios from 'axios';
 
 // Global environmental settings for the solr
-const SOLR_ENDPOINT = process.env.REACT_APP_SOLR_ENDPOINT;
+const SOLR_ENDPOINT = window.SolrEndpoint;
+if (SOLR_ENDPOINT === undefined) {
+  const SOLR_ENDPOINT = process.env.REACT_APP_SOLR_ENDPOINT;
+}
 const SOLR_GEOM_FIELD = process.env.REACT_APP_SOLR_GEOM_FIELD;
 const SOLR_GEOM_ERROR = parseFloat(process.env.REACT_APP_SOLR_GEOM_ERROR);
 const SOLR_INDEX = process.env.REACT_APP_SOLR_INDEX;
@@ -126,7 +129,7 @@ export function fetchDocuments(
 	const url = `${SOLR_ENDPOINT}/` +
 		`${SOLR_INDEX}/select?q=*:*&${getSpatialFitler(adjustExtent, spatialSearchMethod)}` +
 		`${fetchOnlyMaps ? '&fq=type:map' : ''}` +
-		`${fetchOnlyPublic ? '&fq=accessCondition_uui:nein' : ''}` +
+		`${fetchOnlyPublic ? '&fq=restriction:nein' : ''}` +
 		`${fulltextQuery.length > 0 ? '&fq=' + fulltextQuery : ''}` +
 		`&start=0&rows=${SOLR_MAXCOUNT}`;
 
