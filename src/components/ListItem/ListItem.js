@@ -11,6 +11,10 @@ import logo from '../../_image/coverBG.png';
 import { ReactComponent as PolylineIcon} from './line.svg';
 import { ReactComponent as PointIcon } from './point.svg';
 import { ReactComponent as PolygonIcon } from './polygon.svg';
+import { ReactComponent as PublicDocumentsIcon } from './../../views/SideBarView/ControlIcons/public.svg';
+import { LockOpenOutline } from 'react-ionicons';
+import { LockClosed } from 'react-ionicons';
+
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 import './ListItem.scss';
 import LangLabels from '../../views/MapView/components/Labels';
@@ -31,6 +35,7 @@ import LangLabels from '../../views/MapView/components/Labels';
  *     title: string,
  *     type: string,
  *     record_id: string,
+ *     restrictions: string,
  *   }
  * }}
  * @returns {*}
@@ -63,6 +68,22 @@ export default function ListItem({ geometryType, id, properties, onClick, onMous
 					<div className="title">{properties.title.substring(0,titleMaxLength)}{ properties.title.length > titleMaxLength && ' [...]' }
           </div>
 					<div className="footer">
+            <div className="public-docs">
+              { properties.restrictions === 'nein'
+                ? <LockOpenOutline
+                    color={'#464646'}
+                    title={ LangLabels['document.restrictions.no'] }
+                    height="20px"
+                    width="20px"
+                  />
+                : <LockClosed
+                    color={'#464646'}
+                    title={ LangLabels['document.restrictions.yes'] }
+                    height="20px"
+                    width="20px"
+                  />
+              }
+            </div>
 						<div className="text">
               { LangLabels['geosearch.collection'] }: {properties.collection} <br />
 							{ LangLabels['geosearch.structure'] }: { properties.type === 'monograph' && LangLabels['geosearch.structure.monograph'] }
@@ -99,6 +120,7 @@ ListItem.propTypes = {
 		title: PropTypes.string,
 		type: PropTypes.string,
     record_id: PropTypes.string,
+    restrictions: PropTypes.string,
 	}).isRequired,
 	withoutHref: PropTypes.bool,
 };

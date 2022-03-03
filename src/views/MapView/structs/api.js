@@ -129,7 +129,7 @@ export function fetchDocuments(
 	const url = `${SOLR_ENDPOINT}/` +
 		`${SOLR_INDEX}/select?q=*:*&${getSpatialFitler(adjustExtent, spatialSearchMethod)}` +
 		`${fetchOnlyMaps ? '&fq=type:map' : ''}` +
-		`${fetchOnlyPublic ? '&fq=restriction:nein' : ''}` +
+		`${fetchOnlyPublic ? '&fq=restrictions:nein' : ''}` +
 		`${fulltextQuery.length > 0 ? '&fq=' + fulltextQuery : ''}` +
 		`&start=0&rows=${SOLR_MAXCOUNT}`;
 

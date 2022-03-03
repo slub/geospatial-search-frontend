@@ -62,6 +62,7 @@ export function parseAsCSV(rawDocuments) {
  *   type: [string],
  *   uid: [string]
  *   record_id: [string],
+ *   restrictions: [string],
  * }} doc
  * @returns {{
  *   type: string,
@@ -72,6 +73,7 @@ export function parseAsCSV(rawDocuments) {
  *     title: string,
  *     type: string,
  *     record_id: string,
+ *     restrictions: [string],
  *   }}
  *   geometry: {{
  *     type: string,
@@ -121,6 +123,9 @@ export function parseDocument(doc) {
       record_id: doc.record_id
 				? doc.record_id
 				: undefined,
+      restrictions: doc.restrictions && Array.isArray(doc.restrictions) && doc.restrictions.length > 0
+				? doc.restrictions[0]
+				: doc.restrictions,
       shelfmark_usi: doc.shelfmark_usi
 				? doc.shelfmark_usi
 				: undefined,
