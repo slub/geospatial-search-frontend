@@ -45,64 +45,60 @@ export default function ListItem({ geometryType, id, properties, onClick, onMous
   const titleMaxLength = showThumbnails ? 100 : 200;
 
 	return (
-		<a target="_top" className="list-element"
-			href={!withoutHref ? properties.purl : undefined}
-			onClick={() => onClick(id, properties)}
-			onMouseEnter={onMouseEnter}
-			onMouseLeave={onMouseLeave}
-			rel="noopener noreferrer"
+    <><a class="tx-dlf-request tx-dlf-request--restricted" href="javascript:void(0)">
+      <span class="tx-dlf-request--add-basket">zum Warenkorb hinzufügen</span>
+      <span class="tx-dlf-request--remove-basket">vom Warenkorb entfernen</span>
+    </a><a target="_top" className="list-element"
+      href={!withoutHref ? properties.purl : undefined}
+      onClick={() => onClick(id, properties)}
+      onMouseEnter={onMouseEnter}
+      onMouseLeave={onMouseLeave}
+      rel="noopener noreferrer"
       title={properties.title}
-		>
-			<div>
-        {
-          showThumbnails === true &&
-  				<div className="thumbnail-container">
-            <LazyLoadImage
+    >
+        <div>
+          {showThumbnails === true &&
+            <div className="thumbnail-container">
+              <LazyLoadImage
                 alt={"Vorschaubild von " + properties.record_id}
                 src={properties.thumbnail}
-                onError={(e)=>{e.target.onerror = null; e.target.src=logo; e.target.alt="Kein Vorschaubild vorhanden."}}
-            />
-  				</div>
-        }
-				<div className="content-container">
-					<div className="title">{properties.title.substring(0,titleMaxLength)}{ properties.title.length > titleMaxLength && ' [...]' }
-          </div>
-					<div className="footer">
-            <div className="public-docs">
-              { properties.restrictions === 'nein'
-                ? <LockOpenOutline
-                    color={'#464646'}
-                    title={ LangLabels['document.restrictions.no'] }
-                    height="20px"
-                    width="20px"
-                  />
-                : <LockClosed
-                    color={'#464646'}
-                    title={ LangLabels['document.restrictions.yes'] }
-                    height="20px"
-                    width="20px"
-                  />
-              }
+                onError={(e) => { e.target.onerror = null; e.target.src = logo; e.target.alt = "Kein Vorschaubild vorhanden."; } } />
+            </div>}
+          <div className="content-container">
+            <div className="title">{properties.title.substring(0, titleMaxLength)}{properties.title.length > titleMaxLength && ' [...]'}
             </div>
-						<div className="text">
-              { LangLabels['geosearch.collection'] }: {properties.collection} <br />
-							{ LangLabels['geosearch.structure'] }: { properties.type === 'monograph' && LangLabels['geosearch.structure.monograph'] }
-              { properties.type === 'map' && LangLabels['geosearch.structure.map'] }
-              { properties.type === 'volume' && LangLabels['geosearch.structure.volume'] } | ID: {properties.record_id}
-						</div>
-						{
-							geometryType !== undefined && (
-								<div className="image">
-									{ geometryType === 'Polygon' && (<PolygonIcon />) }
-									{ geometryType === 'LineString' && (<PolylineIcon />) }
-									{ geometryType === 'Point' && (<PointIcon />) }
-								</div>
-							)
-						}
-					</div>
-				</div>
-			</div>
-		</a>
+            <div className="footer">
+              <div className="public-docs">
+                {properties.restrictions === 'nein'
+                  ? <LockOpenOutline
+                    color={'#464646'}
+                    title={LangLabels['document.restrictions.no']}
+                    height="20px"
+                    width="20px" />
+                  : <><LockClosed
+                    color={'#464646'}
+                    title={LangLabels['document.restrictions.yes']}
+                    height="20px"
+                    width="20px" />
+                  </>}
+              </div>
+              <div className="text">
+                {LangLabels['geosearch.collection']}: {properties.collection} <br />
+                {LangLabels['geosearch.structure']}: {properties.type === 'monograph' && LangLabels['geosearch.structure.monograph']}
+                {properties.type === 'map' && LangLabels['geosearch.structure.map']}
+                {properties.type === 'volume' && LangLabels['geosearch.structure.volume']} | <dd className="tx-dlf-metadata-record_id" data-id={properties.record_id}>{properties.record_id}</dd>
+              </div>
+              {geometryType !== undefined && (
+                <div className="image">
+                  {geometryType === 'Polygon' && (<PolygonIcon />)}
+                  {geometryType === 'LineString' && (<PolylineIcon />)}
+                  {geometryType === 'Point' && (<PointIcon />)}
+                </div>
+              )}
+            </div>
+          </div>
+        </div>
+      </a></>
 	);
 }
 
