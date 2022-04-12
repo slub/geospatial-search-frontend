@@ -47,11 +47,11 @@ export default function ListItem({ geometryType, id, properties, onClick, onMous
 	return (
     <React.Fragment>
       {properties.restrictions === 'nein'
-        ? <a className="tx-dlf-request tx-dlf-request--restricted" href="javascript:void(0)">
-              <span className="tx-dlf-request--add-basket">{LangLabels['basket.add']}</span>
-              <span className="tx-dlf-request--remove-basket">{LangLabels['basket.remove']}</span>
+        ? ''
+        : <a className="tx-dlf-request tx-dlf-request--restricted" href="javascript:void(0)">
+            <span className="tx-dlf-request--add-basket">{LangLabels['basket.add']}</span>
+            <span className="tx-dlf-request--remove-basket">{LangLabels['basket.remove']}</span>
           </a>
-        : ''
       }
       <a target="_top" className="list-element"
         href={!withoutHref ? properties.purl : undefined}
@@ -91,7 +91,9 @@ export default function ListItem({ geometryType, id, properties, onClick, onMous
                 {LangLabels['geosearch.collection']}: {properties.collection} <br />
                 {LangLabels['geosearch.structure']}: {properties.type === 'monograph' && LangLabels['geosearch.structure.monograph']}
                 {properties.type === 'map' && LangLabels['geosearch.structure.map']}
-                {properties.type === 'volume' && LangLabels['geosearch.structure.volume']} | <span className="tx-dlf-metadata-record_id" data-id={properties.record_id}>{properties.record_id}</span>
+                {properties.type === 'volume' && LangLabels['geosearch.structure.volume']} |
+                <span className="tx-dlf-metadata-record_id" data-id={properties.record_id}>{properties.record_id}</span>
+                <span className="tx-dlf-metadata-restrictions" style={{display: 'none'}}>{properties.restrictions}</span>
               </div>
               {geometryType !== undefined && (
                 <div className="image">
