@@ -45,17 +45,22 @@ export default function ListItem({ geometryType, id, properties, onClick, onMous
   const titleMaxLength = showThumbnails ? 100 : 200;
 
 	return (
-    <><a class="tx-dlf-request tx-dlf-request--restricted" href="javascript:void(0)">
-      <span class="tx-dlf-request--add-basket">zum Warenkorb hinzufügen</span>
-      <span class="tx-dlf-request--remove-basket">vom Warenkorb entfernen</span>
-    </a><a target="_top" className="list-element"
-      href={!withoutHref ? properties.purl : undefined}
-      onClick={() => onClick(id, properties)}
-      onMouseEnter={onMouseEnter}
-      onMouseLeave={onMouseLeave}
-      rel="noopener noreferrer"
-      title={properties.title}
-    >
+    <React.Fragment>
+      {properties.restrictions === 'nein'
+        ? <a className="tx-dlf-request tx-dlf-request--restricted" href="javascript:void(0)">
+              <span className="tx-dlf-request--add-basket">{LangLabels['basket.add']}</span>
+              <span className="tx-dlf-request--remove-basket">{LangLabels['basket.remove']}</span>
+          </a>
+        : ''
+      }
+      <a target="_top" className="list-element"
+        href={!withoutHref ? properties.purl : undefined}
+        onClick={() => onClick(id, properties)}
+        onMouseEnter={onMouseEnter}
+        onMouseLeave={onMouseLeave}
+        rel="noopener noreferrer"
+        title={properties.title}
+      >
         <div>
           {showThumbnails === true &&
             <div className="thumbnail-container">
@@ -86,7 +91,7 @@ export default function ListItem({ geometryType, id, properties, onClick, onMous
                 {LangLabels['geosearch.collection']}: {properties.collection} <br />
                 {LangLabels['geosearch.structure']}: {properties.type === 'monograph' && LangLabels['geosearch.structure.monograph']}
                 {properties.type === 'map' && LangLabels['geosearch.structure.map']}
-                {properties.type === 'volume' && LangLabels['geosearch.structure.volume']} | <dd className="tx-dlf-metadata-record_id" data-id={properties.record_id}>{properties.record_id}</dd>
+                {properties.type === 'volume' && LangLabels['geosearch.structure.volume']} | <span className="tx-dlf-metadata-record_id" data-id={properties.record_id}>{properties.record_id}</span>
               </div>
               {geometryType !== undefined && (
                 <div className="image">
@@ -98,7 +103,8 @@ export default function ListItem({ geometryType, id, properties, onClick, onMous
             </div>
           </div>
         </div>
-      </a></>
+      </a>
+      </React.Fragment>
 	);
 }
 

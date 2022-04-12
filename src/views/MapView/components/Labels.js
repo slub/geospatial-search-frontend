@@ -23,7 +23,9 @@ if (LangLabels === undefined) {
     'geosearch.structure': 'Strukturtyp',
     'geosearch.structure.map': 'Karte',
     'geosearch.structure.monograph': 'Monographie',
-    'geosearch.structure.volume': 'Band'
+    'geosearch.structure.volume': 'Band',
+    'basket.add': 'zum Warenkorb hinzufügen',
+    'basket.remove': 'vom Warenkorb entfernen'
    };
 }
 
