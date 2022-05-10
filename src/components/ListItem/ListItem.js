@@ -8,50 +8,45 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import logo from '../../_image/coverBG.png';
-import { ReactComponent as PolylineIcon} from './line.svg';
-import { ReactComponent as PointIcon } from './point.svg';
-import { ReactComponent as PolygonIcon } from './polygon.svg';
-import { ReactComponent as PublicDocumentsIcon } from './../../views/SideBarView/ControlIcons/public.svg';
-import { LockOpenOutline } from 'react-ionicons';
-import { LockClosed } from 'react-ionicons';
+import {ReactComponent as PolylineIcon} from './line.svg';
+import {ReactComponent as PointIcon} from './point.svg';
+import {ReactComponent as PolygonIcon} from './polygon.svg';
+import {LockOpenOutline} from 'react-ionicons';
+import {LockClosed} from 'react-ionicons';
+import {useCookies} from 'react-cookie';
 
-import { LazyLoadImage } from 'react-lazy-load-image-component';
+import {LazyLoadImage} from 'react-lazy-load-image-component';
 import './ListItem.scss';
 import LangLabels from '../../views/MapView/components/Labels';
 
 /**
- * Function component for rendering a ListITem.
- *
- * @param {{
- *   geometryType: string|undefined,
- *   id: string,
- *   onClick: Function,
- *   onMouseEnter: Function,
- *   onMouseLeave: Function
- *   properties: {
- *     collection: string,
- *     thumbnail: string,
- *     timestamp: string,
- *     title: string,
- *     type: string,
- *     record_id: string,
- *     restrictions: string,
- *   }
- * }}
+ * Function component for rendering a ListItem.
  * @returns {*}
  */
 export default function ListItem({ geometryType, id, properties, onClick, onMouseEnter, onMouseLeave, withoutHref = false, showThumbnails = true }) {
 
   const titleMaxLength = showThumbnails ? 100 : 200;
+  const [cookies, setCookie] = useCookies(['dlf-requests']);
 
-	return (
+  function getBasketIdsFromCookie() {
+    const basketCookie = cookies['dlf-requests'];
+    return typeof basketCookie === 'undefined' ?  [] : basketCookie;
+  }
+
+  function updateCookie() {
+    let basketIds = getBasketIdsFromCookie();
+    basketIds.includes(properties.record_id)
+      ? basketIds = basketIds.filter(id => id !== properties.record_id)
+      : basketIds = [...basketIds, properties.record_id];
+    setCookie('dlf-requests', basketIds, {path: '/'});
+  }
+
+  return (
     <React.Fragment>
-      {properties.restrictions === 'nein'
-        ? ''
-        : <a className="tx-dlf-request tx-dlf-request--restricted" href="javascript:void(0)">
-            <span className="tx-dlf-request--add-basket">{LangLabels['basket.add']}</span>
-            <span className="tx-dlf-request--remove-basket">{LangLabels['basket.remove']}</span>
-          </a>
+      {properties.restrictions === 'ja' &&
+        getBasketIdsFromCookie().includes(properties.record_id)
+        ? <div className='digas-basket remove' onClick={() => updateCookie()}>{LangLabels['basket.remove']}</div>
+        : <div className='digas-basket add' onClick={() => updateCookie()}>{LangLabels['basket.add']}</div>
       }
       <a target="_top" className="list-element"
         href={!withoutHref ? properties.purl : undefined}
@@ -79,16 +74,16 @@ export default function ListItem({ geometryType, id, properties, onClick, onMous
                     color={'#464646'}
                     title={LangLabels['document.restrictions.no']}
                     height="20px"
-                    width="20px" />
+                    width="20px"/>
                   : <><LockClosed
                     color={'#464646'}
                     title={LangLabels['document.restrictions.yes']}
                     height="20px"
-                    width="20px" />
+                    width="20px"/>
                   </>}
               </div>
               <div className="text">
-                {LangLabels['geosearch.collection']}: {properties.collection} <br />
+                {LangLabels['geosearch.collection']}: {properties.collection} <br/>
                 {LangLabels['geosearch.structure']}: {properties.type === 'monograph' && LangLabels['geosearch.structure.monograph']}
                 {properties.type === 'map' && LangLabels['geosearch.structure.map']}
                 {properties.type === 'volume' && LangLabels['geosearch.structure.volume']} |
@@ -97,34 +92,34 @@ export default function ListItem({ geometryType, id, properties, onClick, onMous
               </div>
               {geometryType !== undefined && (
                 <div className="image">
-                  {geometryType === 'Polygon' && (<PolygonIcon />)}
-                  {geometryType === 'LineString' && (<PolylineIcon />)}
-                  {geometryType === 'Point' && (<PointIcon />)}
+                  {geometryType === 'Polygon' && (<PolygonIcon/>)}
+                  {geometryType === 'LineString' && (<PolylineIcon/>)}
+                  {geometryType === 'Point' && (<PointIcon/>)}
                 </div>
               )}
             </div>
           </div>
         </div>
       </a>
-      </React.Fragment>
-	);
+    </React.Fragment>
+  );
 }
 
 // Definition of input data
 ListItem.propTypes = {
-	geometryType: PropTypes.string,
-	id: PropTypes.string.isRequired,
-	onClick: PropTypes.func.isRequired,
-	onMouseEnter: PropTypes.func.isRequired,
-	onMouseLeave: PropTypes.func.isRequired,
-	properties: PropTypes.shape({
-		collection: PropTypes.string,
-		thumbnail: PropTypes.string,
-		timestamp: PropTypes.string,
-		title: PropTypes.string,
-		type: PropTypes.string,
+  geometryType: PropTypes.string,
+  id: PropTypes.string.isRequired,
+  onClick: PropTypes.func.isRequired,
+  onMouseEnter: PropTypes.func.isRequired,
+  onMouseLeave: PropTypes.func.isRequired,
+  properties: PropTypes.shape({
+    collection: PropTypes.string,
+    thumbnail: PropTypes.string,
+    timestamp: PropTypes.string,
+    title: PropTypes.string,
+    type: PropTypes.string,
     record_id: PropTypes.string,
     restrictions: PropTypes.string,
-	}).isRequired,
-	withoutHref: PropTypes.bool,
+  }).isRequired,
+  withoutHref: PropTypes.bool,
 };

@@ -295,7 +295,11 @@ class SideBarView extends Component {
             }
           </div>
           <div className="sidebar-content">
-            <span class="basket-link-counter"></span>
+            <div className="basket">
+              {
+                // TBD
+              }
+            </div>
             <ul>
               {
                 docs.length > 0
