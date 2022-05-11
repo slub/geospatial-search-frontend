@@ -23,6 +23,7 @@ import {parseAsCSV} from '../MapView/structs/parser';
 import LangLabels from '../../views/MapView/components/Labels';
 import ListItem from '../../components/ListItem/ListItem';
 import FulltextSearch from '../../components/FulltextSearch/FulltextSearch';
+import DlfBasket from "../../components/DlfBasket/DlfBasket";
 import './SideBarView.scss';
 
 // Global environmental settings for the solr
@@ -268,6 +269,7 @@ class SideBarView extends Component {
                   >
                     <PrintIcon/>
                   </div>
+                  <DlfBasket />
                 </React.Fragment>
               }
             </div>
@@ -295,11 +297,6 @@ class SideBarView extends Component {
             }
           </div>
           <div className="sidebar-content">
-            <div className="basket">
-              {
-                // TBD
-              }
-            </div>
             <ul>
               {
                 docs.length > 0
