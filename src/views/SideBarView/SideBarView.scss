@@ -97,10 +97,10 @@
       margin: 0;
 
       li {
-        @include transition(all .3s ease-in-out);
+        @include transition();
 
         &:nth-child(odd) {
-          background-color: rgba(0, 128, 255, .1);
+          background-color: rgba($baseColor, .1);
         }
 
         &:hover {
@@ -113,11 +113,6 @@
           &:hover {
             background-color: rgba(0, 128, 255, .4);
           }
-        }
-
-        .title {
-          line-height: 1.2;
-          margin-bottom: 5px;
         }
       }
     }
