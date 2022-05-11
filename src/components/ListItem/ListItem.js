@@ -44,9 +44,12 @@ export default function ListItem({ geometryType, id, properties, onClick, onMous
   return (
     <React.Fragment>
       {properties.restrictions === 'ja' &&
-        getBasketIdsFromCookie().includes(properties.record_id)
-        ? <div className='digas-basket remove' onClick={() => updateCookie()}>{LangLabels['basket.remove']}</div>
-        : <div className='digas-basket add' onClick={() => updateCookie()}>{LangLabels['basket.add']}</div>
+        <div className="basket-link">
+          {getBasketIdsFromCookie().includes(properties.record_id)
+            ? <div className='digas-basket remove' onClick={() => updateCookie()}>{LangLabels['basket.remove']}</div>
+            : <div className='digas-basket add' onClick={() => updateCookie()}>{LangLabels['basket.add']}</div>
+          }
+        </div>
       }
       <a target="_top" className="list-element"
         href={!withoutHref ? properties.purl : undefined}
