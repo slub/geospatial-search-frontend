@@ -74,9 +74,6 @@ class App extends Component {
       // count which the search index associated with the document search.
       maxDocuments: 0,
 
-      // OffsetWidth is used in conjunction with the toggleIn
-      offsetWidth: 0,
-
       // Signals if the print dialog is open
       printDialogOpen: false,
 
@@ -199,7 +196,6 @@ class App extends Component {
       fulltextSearchOpen,
       fulltextSearchTerms,
       maxDocuments,
-      offsetWidth,
       printDialogOpen,
       selectDocuments,
       sorted,
@@ -215,7 +211,6 @@ class App extends Component {
           fetchOnlyPublic={fetchOnlyPublic}
           fulltextSearchTerms={fulltextSearchTerms}
           focusDocument={focusDocument}
-          offsetWidth={!toggleIn || window.innerWidth < BREAK_POINT_XS ? 0 : offsetWidth}
           onDocumentUpdate={this.handleDocumentUpdate}
           onUpdateFocusDocument={this.handleFocusDocumentUpdate}
           onUpdateSelectDocuments={this.handleSelectDocumentsUpdate}
@@ -235,7 +230,6 @@ class App extends Component {
           fulltextSearchTerms={fulltextSearchTerms}
           maxDocuments={maxDocuments}
           onClose={() => this.handleSidebarToggle(false)}
-          onMount={(offsetWidth) => this.setState({ offsetWidth: offsetWidth })}
           onUpdateFetchOnlyMaps={this.handleFetchOnlyMapsUpdate}
           onUpdateFetchOnlyPublic={this.handleFetchOnlyPublicUpdate}
           onUpdateFocusDocument={this.handleFocusDocumentUpdate}
@@ -269,7 +263,7 @@ App.propTypes = {
   fulltextSearchTerms: PropTypes.string,
   sorted: PropTypes.bool,
   spatialSearchMethode: PropTypes.string,
-  toggleMode: PropTypes.number,
+  toggleMode: PropTypes.bool,
 };
 
 /**

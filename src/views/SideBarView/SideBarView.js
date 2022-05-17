@@ -110,10 +110,6 @@ class SideBarView extends Component {
 
   componentDidMount() {
     const {refSidebar} = this.state;
-
-    if (this.props.onMount) {
-      this.props.onMount(refSidebar.current.offsetWidth);
-    }
   }
 
   handleClick = (id, {purl}) => {
