@@ -20,11 +20,7 @@ export default function DlfBasket() {
   const url = window.BasketLink ? window.BasketLink : process.env.REACT_APP_BASKET_LINK;
 
   function getBasketCount() {
-    if (cookies['dlf-requests'] !== undefined) {
-      return cookies['dlf-requests'].length;
-    } else {
-      return 0;
-    }
+    return (cookies['dlf-requests'] !== undefined) ? cookies['dlf-requests'].length : 0;
   }
 
   return (
