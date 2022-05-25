@@ -263,7 +263,6 @@ OlMap.propTypes = {
 		center: PropTypes.arrayOf(PropTypes.number),
 		zoom: PropTypes.number,
 	}),
-	offsetWidth: PropTypes.number,
 	onChange: PropTypes.func,
 	onLoad: PropTypes.func,
 	onSearch: PropTypes.func,

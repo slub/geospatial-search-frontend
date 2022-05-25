@@ -7,10 +7,7 @@
 import axios from 'axios';
 
 // Global environmental settings for the solr
-const SOLR_ENDPOINT = window.SolrEndpoint;
-if (SOLR_ENDPOINT === undefined) {
-  const SOLR_ENDPOINT = process.env.REACT_APP_SOLR_ENDPOINT;
-}
+const SOLR_ENDPOINT = window.SolrEndpoint ? window.SolrEndpoint : process.env.REACT_APP_SOLR_ENDPOINT;
 const SOLR_GEOM_FIELD = process.env.REACT_APP_SOLR_GEOM_FIELD;
 const SOLR_GEOM_ERROR = parseFloat(process.env.REACT_APP_SOLR_GEOM_ERROR);
 const SOLR_INDEX = process.env.REACT_APP_SOLR_INDEX;

@@ -1,5 +1,9 @@
 @import "../_sass/variables.scss";
 
+*, :after, :before, html {
+  box-sizing: border-box;
+}
+
 body {
   margin: 0;
 }

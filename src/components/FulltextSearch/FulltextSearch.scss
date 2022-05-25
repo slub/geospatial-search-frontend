@@ -109,8 +109,11 @@
 
         &:after {
           position: absolute;
-          top: -5px;
-          left: 1px;
+          top: 2px;
+          left: 2px;
+          height: 13px;
+          width: 13px;
+          line-height: 12px;
           content: "+";
           font-size: 20px;
           text-indent: 0;

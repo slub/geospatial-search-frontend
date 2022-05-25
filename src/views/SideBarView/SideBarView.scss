@@ -41,29 +41,16 @@
   }
 
   .sidebar-header {
-    height: auto;
     width: 100%;
     position: relative;
     font-size: 16px;
-    display: flex;
-    justify-content: space-between;
-
-    > div {
-      padding: 5px;
-      display: flex;
-      flex-direction: row;
-      flex-basis: 400px;
-
-      > p {
-        text-align: left;
-      }
-    }
 
     .controls {
-      justify-content: space-between;
+      position: relative;
       border-bottom: 1px solid #eee;
-      padding: 5px 10px;
-
+      padding: 5px 15px 5px 10px;
+      display: flex;
+      justify-content: space-between;
 
       .digas-control {
         margin: 0 3px;
@@ -75,7 +62,7 @@
           fill: $baseColor;
         }
 
-        &.order-list, &.only-maps, &.only-public-docs, &.toggle-fulltextsearch {
+        &.order-list, &.only-maps, &.only-public-docs {
           opacity: .5;
 
           &.active {
@@ -97,10 +84,10 @@
       margin: 0;
 
       li {
-        @include transition(all .3s ease-in-out);
+        @include transition();
 
         &:nth-child(odd) {
-          background-color: rgba(0, 128, 255, .1);
+          background-color: rgba($baseColor, .1);
         }
 
         &:hover {
@@ -113,11 +100,6 @@
           &:hover {
             background-color: rgba(0, 128, 255, .4);
           }
-        }
-
-        .title {
-          line-height: 1.2;
-          margin-bottom: 5px;
         }
       }
     }
@@ -138,13 +120,6 @@
           display: none;
         }
       }
-    }
-  }
-
-  @media screen and (min-width: $break-point-xs) and (max-width: $break-point-md) {
-    width: 450px;
-    .sidebar-header {
-      display: block;
     }
   }
 

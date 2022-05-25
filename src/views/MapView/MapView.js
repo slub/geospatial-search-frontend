@@ -15,7 +15,7 @@ import OlLayer from './components/OlLayer';
 import OlMap from './components/OlMap';
 import OlPopup from './components/Popup/Popup';
 import { fetchDocuments } from './structs/api';
-import { correctExtent } from './structs/geom';
+import { calculateExtent } from './structs/geom';
 import {
   parseDocument,
   parseGeoJsonFeatures,
@@ -103,8 +103,6 @@ export class MapView extends Component {
   updateDocuments = (extent = undefined) => {
     const { map, mapView } = this.state;
     const { fetchOnlyMaps, fetchOnlyPublic, fulltextSearchTerms, spatialSearchMethod } = this.props;
-    // if we do not use the sidebar toggle feature, offsetwith is always 0
-    const { offsetWidth } = '0'; //this.props;
 
     // This function could be called when the map is not initialized. In this case
     // Return
@@ -112,9 +110,8 @@ export class MapView extends Component {
       return;
     }
 
-    // In case the sidebar is open, we calculate the extent with an offset
-    // if not use the default extraction path for extent
-    const extentMapView = correctExtent(mapView.extent, offsetWidth, map);
+    // In case the extent isn't present it'll calculated by the mapView element
+    const extentMapView = calculateExtent(mapView.extent, map);
 
     if (extent !== undefined || extentMapView !== undefined) {
       const searchExtent = extent !== undefined ? extent : extentMapView;
@@ -228,7 +225,7 @@ export class MapView extends Component {
   };
 
   render() {
-    const { className, focusDocument, offsetWidth, selectDocuments } = this.props;
+    const { className, focusDocument, selectDocuments } = this.props;
     const { documents, map, mapView } = this.state;
 
     return (
@@ -237,7 +234,6 @@ export class MapView extends Component {
           mapAttribution={MAP_BASEMAP_ATTRIBUTION}
           mapUrl={MAP_BASEMAP}
           mapView={mapView}
-          offsetWidth={offsetWidth}
           onChange={this.handleMapChange.bind(this)}
           onLoad={this.handleMapLoad.bind(this)}
           onSearch={this.handleOnSearch}
@@ -316,7 +312,6 @@ MapView.defaultProps = {
   fetchOnlyPublic: false,
   fulltextSearchTerms: [],
   focusDocument: undefined,
-  offsetWidth: 0,
   selectDocuments: [],
 };
 
@@ -328,7 +323,6 @@ MapView.propTypes = {
     PropTypes.string,
   ),
   focusDocument: PropTypes.instanceOf(Feature),
-  offsetWidth: PropTypes.number,
   onDocumentUpdate: PropTypes.func,
   onUpdateFocusDocument: PropTypes.func.isRequired,
   onUpdateSelectDocuments: PropTypes.func.isRequired,

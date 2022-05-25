@@ -1,0 +1,22 @@
+@import "../../_sass/variables.scss";
+
+.digas-control.dlf-basket {
+  position: relative;
+  .basket-count {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    min-width: 18px;
+    padding: 0 4px;
+    height: 18px;
+    line-height: 16px;
+    text-align: center;
+    border-radius: 9px;
+    border: 2px solid white;
+    color: white;
+    font-weight: bold;
+    font-size: 10px;
+    background: $baseColor;
+
+  }
+}

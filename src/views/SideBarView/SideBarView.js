@@ -23,6 +23,7 @@ import {parseAsCSV} from '../MapView/structs/parser';
 import LangLabels from '../../views/MapView/components/Labels';
 import ListItem from '../../components/ListItem/ListItem';
 import FulltextSearch from '../../components/FulltextSearch/FulltextSearch';
+import DlfBasket from "../../components/DlfBasket/DlfBasket";
 import './SideBarView.scss';
 
 // Global environmental settings for the solr
@@ -109,10 +110,6 @@ class SideBarView extends Component {
 
   componentDidMount() {
     const {refSidebar} = this.state;
-
-    if (this.props.onMount) {
-      this.props.onMount(refSidebar.current.offsetWidth);
-    }
   }
 
   handleClick = (id, {purl}) => {
@@ -211,6 +208,16 @@ class SideBarView extends Component {
             <div className="controls">
               {
                 <React.Fragment>
+                  <div title={
+                    fulltextSearchOpen
+                      ? LangLabels['geosearch.searchft.close']
+                      : LangLabels['geosearch.searchft.open']
+                  }
+                    className={`digas-control toggle-fulltextsearch ${fulltextSearchOpen ? 'active' : ''}`}
+                    onClick={() => this.props.onUpdateFulltextSearchOpen(!fulltextSearchOpen)}
+                  >
+                    <SearchIcon/>
+                  </div>
                   <div title={LangLabels['geosearch.sort']}
                     className={`digas-control order-list ${sorted ? 'active' : ''}`}
                     onClick={() => this.props.onUpdateSort(!sorted)}
@@ -242,16 +249,6 @@ class SideBarView extends Component {
                     intersectOn ? <LocalDocumentsIcon/> : <AllDocumentsIcon/>
                   }
                   </div>
-                  <div title={
-                    fulltextSearchOpen
-                      ? LangLabels['geosearch.searchft.close']
-                      : LangLabels['geosearch.searchft.open']
-                  }
-                    className={`digas-control toggle-fulltextsearch ${fulltextSearchOpen ? 'active' : ''}`}
-                    onClick={() => this.props.onUpdateFulltextSearchOpen(!fulltextSearchOpen)}
-                  >
-                    <SearchIcon/>
-                  </div>
                   <div title={LangLabels['geosearch.exportcsv']}
                     className="digas-control export-list"
                     onClick={this.handleExportCSV}
@@ -268,6 +265,7 @@ class SideBarView extends Component {
                   >
                     <PrintIcon/>
                   </div>
+                  <DlfBasket />
                 </React.Fragment>
               }
             </div>
