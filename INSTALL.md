@@ -14,7 +14,7 @@ With `npm start` you start a testserver. The `.env.development` file is used for
 
 ## Build Production App (Standalone)
 
-`npm run build-bundle` 
+`npm run build`
 
 This will produce the following files:
 
@@ -30,10 +30,11 @@ This will produce the following files:
 
 `npm run build-bundle`
 
-This will produce the following files:
+This will produce the following files and folders:
 
 * `build/export/css/main.css`
 * `build/export/js/main.js`
+* `build/export/media/`
 
 These files can be embedded into a HTML-Page like this:
 
